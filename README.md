@@ -1,16 +1,58 @@
-# React + Vite
+# ABDL-Space 开放平台
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ABDL-Space 第三方开发者平台，管理验证码 API Key、OAuth 应用，查阅开发文档。
 
-Currently, two official plugins are available:
+## 功能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **仪表盘** — 总览入口
+- **验证码 API Key** — 创建和管理 Captcha API Key
+- **OAuth 应用** — 注册和管理 OAuth 2.0 应用
+- **API 文档** — 验证码 API + OAuth 2.0 接入文档
 
-## React Compiler
+## 技术栈
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Vite + React + React Router
+- 无独立后端，通过 OAuth PKCE 使用 ABDL-Space API
 
-## Expanding the ESLint configuration
+## 登录机制
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+作为 ABDL-Space 的 OAuth 客户端，使用 **Authorization Code + PKCE** 流程：
+
+1. 用户访问开放平台 → 跳转 ABDL-Space `/oauth/authorize`
+2. 用户确认授权 → 回调 `/callback` 携带 code
+3. 前端用 code + code_verifier 换取 access_token
+4. 使用 access_token 调用 ABDL-Space API
+
+## 环境变量
+
+```bash
+VITE_API_BASE=https://api.abdl-space.top
+VITE_MAIN_SITE=https://abdl-space.top
+VITE_OAUTH_CLIENT_ID=oc_open_platform   # 需先在 ABDL-Space 创建
+```
+
+## 部署前准备
+
+1. 在 ABDL-Space 主站 `/oauth-clients` 创建 OAuth 应用
+2. 设置 redirect_uri 为开放平台域名 + `/callback`
+3. 将 client_id 填入 `VITE_OAUTH_CLIENT_ID`
+4. 部署到 Vercel / Cloudflare Pages
+
+## 开发
+
+```bash
+npm install
+npm run dev     # localhost:5174
+```
+
+## 页面路由
+
+| 路径 | 说明 |
+|------|------|
+| `/` | 仪表盘 |
+| `/captcha-keys` | 验证码 Key 管理 |
+| `/oauth-clients` | OAuth 应用管理 |
+| `/docs/captcha` | 验证码 API 文档 |
+| `/docs/oauth` | OAuth 2.0 文档 |
+| `/callback` | OAuth 回调 |
+| `/login` | 登录页 |
