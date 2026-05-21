@@ -56,3 +56,10 @@ npm run dev     # localhost:5174
 | `/docs/oauth` | OAuth 2.0 文档 |
 | `/callback` | OAuth 回调 |
 | `/login` | 登录页 |
+
+## 安全
+
+- OAuth PKCE (S256) 登录，无 Client Secret 暴露
+- Token 自动刷新（access_token 1h，refresh_token 30d）
+- API 限速：所有端点均有 IP 级频率限制
+- CORS：外部 API 允许所有来源，内部 API 仅允许 `*.abdl-space.top`
