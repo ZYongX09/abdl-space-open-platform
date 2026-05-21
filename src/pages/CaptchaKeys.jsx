@@ -73,7 +73,7 @@ export default function CaptchaKeys() {
               <i className="fa-solid fa-circle-check" style={{ color: 'var(--success)', marginRight: '0.4rem' }} />
               API Key 已创建
             </p>
-            <p style={{ fontSize: '0.75rem', color: 'var(--danger)', marginBottom: '0.5rem' }}>⚠️ 请立即复制保存，仅显示一次</p>
+            <p style={{ fontSize: '0.75rem', color: 'var(--danger)', marginBottom: '0.5rem' }}><i className="fa-solid fa-triangle-exclamation mr-1" />请立即复制保存，仅显示一次</p>
             <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
               <code style={{ flex: 1, wordBreak: 'break-all', padding: '0.5rem', fontSize: '0.8rem' }}>{revealedKey.key}</code>
               <button className="btn btn-outline btn-sm" onClick={() => copy(revealedKey.key)}><i className="fa-solid fa-copy" /></button>
