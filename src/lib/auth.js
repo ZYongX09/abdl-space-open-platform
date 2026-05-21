@@ -174,18 +174,24 @@ export async function getUserInfo() {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (res.status === 401) {
+      console.warn('[Auth] Token expired, trying refresh...');
       // 尝试刷新
       try {
         await refreshAccessToken();
         return getUserInfo();
-      } catch {
+      } catch (e) {
+        console.warn('[Auth] Refresh failed:', e.message);
         clearTokens();
         return null;
       }
     }
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.warn('[Auth] userinfo failed:', res.status);
+      return null;
+    }
     return res.json();
-  } catch {
+  } catch (e) {
+    console.error('[Auth] getUserInfo network error:', e.message);
     return null;
   }
 }
