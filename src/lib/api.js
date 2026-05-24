@@ -40,3 +40,13 @@ export const captchaAPI = {
   status: () => apiFetch('/api/captcha/status'),
   types: () => apiFetch('/api/v1/captcha/types'),
 };
+
+/* ============================================================
+ * Content API Key 管理
+ * ============================================================ */
+export const contentKeysAPI = {
+  list: () => apiFetch('/api/content/keys'),
+  create: (data) => apiFetch('/api/content/keys', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id, data) => apiFetch(`/api/content/keys/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  delete: (id) => apiFetch(`/api/content/keys/${id}`, { method: 'DELETE' }),
+};

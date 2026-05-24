@@ -4,7 +4,9 @@ import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import CaptchaKeys from './pages/CaptchaKeys';
 import OAuthClients from './pages/OAuthClients';
+import ContentKeys from './pages/ContentKeys';
 import DocsCaptcha from './pages/DocsCaptcha';
+import DocsContent from './pages/DocsContent';
 import DocsOAuth from './pages/DocsOAuth';
 import Callback from './pages/Callback';
 import Login from './pages/Login';
@@ -20,8 +22,10 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/captcha-keys" element={<CaptchaKeys />} />
+            <Route path="/content-keys" element={<ContentKeys />} />
             <Route path="/oauth-clients" element={<OAuthClients />} />
             <Route path="/docs/captcha" element={<DocsCaptcha />} />
+            <Route path="/docs/content" element={<DocsContent />} />
             <Route path="/docs/oauth" element={<DocsOAuth />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
