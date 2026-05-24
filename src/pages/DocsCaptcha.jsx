@@ -55,7 +55,8 @@ export default function DocsCaptcha() {
   "verified": true,
   "token": "eyJhbG...",
   "attempts_left": 4,
-  "locked": false
+  "locked": false,
+  "lock_seconds": 0
 }`}</pre>
         </section>
 
@@ -126,7 +127,7 @@ const { verified, token } = await result.json();`}</pre>
               <tr><td><code>401</code></td><td>缺少或无效的 API Key</td></tr>
               <tr><td><code>403</code></td><td>Key 权限不足</td></tr>
               <tr><td><code>400</code></td><td>参数错误</td></tr>
-              <tr><td><code>429</code></td><td>请求频率超限</td></tr>
+              <tr><td><code>429</code></td><td>请求频率超限（限速）或验证次数超限（<code>locked=true</code>，需等待 <code>lock_seconds</code> 秒）</td></tr>
               <tr><td><code>500</code></td><td>服务器内部错误</td></tr>
             </tbody>
           </table>

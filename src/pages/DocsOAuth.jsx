@@ -28,7 +28,7 @@ export default function DocsOAuth() {
 
         <section style={{ marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Step 1: 引导用户授权</h2>
-          <pre>{`GET https://abdl-space.top/oauth/authorize
+          <pre>{`GET https://api.abdl-space.top/api/oauth/authorize
   ?client_id=oc_your_client_id
   &redirect_uri=https://your-app.com/callback
   &scope=profile email
@@ -97,6 +97,7 @@ Content-Type: application/json
               <tr><td><code>email</code></td><td>邮箱地址</td></tr>
               <tr><td><code>read</code></td><td>读取用户数据</td></tr>
               <tr><td><code>write</code></td><td>写入用户数据</td></tr>
+              <tr><td><code>admin</code></td><td>管理操作（需特别授权，普通应用不可申请）</td></tr>
             </tbody>
           </table>
         </section>

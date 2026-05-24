@@ -73,6 +73,8 @@ export default function DocsContent() {
       "pinned": false,
       "like_count": 12,
       "comment_count": 3,
+      "repost_id": null,
+      "repost": null,
       "created_at": 1716500000
     }
   ],
@@ -247,7 +249,7 @@ for post in data["posts"]:
         <section style={{ marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>频率限制</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
-            <p>默认速率限制为 <strong>200 次/分钟</strong>（创建 Key 时可自定义，范围 1-10000）。</p>
+            <p>默认速率限制为 <strong>200 次/分钟</strong>（创建 Key 时可自定义，范围 1-10000）。全局上限为 120 次/分钟，实际限制 = min(你的 Key 限速, 120)。</p>
             <p style={{ marginTop: '0.5rem' }}>超限返回 <code>429 Too Many Requests</code>，请做好重试和退避逻辑。</p>
             <p style={{ marginTop: '0.5rem' }}>响应 Header 中包含：</p>
             <ul style={{ marginTop: '0.25rem', paddingLeft: '1.5rem' }}>

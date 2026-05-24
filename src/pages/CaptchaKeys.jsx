@@ -92,7 +92,7 @@ export default function CaptchaKeys() {
               <input className="form-control" value={form.label} onChange={e => setForm(f => ({ ...f, label: e.target.value }))} placeholder="如: 我的网站" />
             </div>
             <div style={{ marginBottom: '0.75rem' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>每小时请求上限</label>
+              <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.25rem' }}>每分钟请求上限</label>
               <input type="number" className="form-control" value={form.rate_limit} onChange={e => setForm(f => ({ ...f, rate_limit: Number(e.target.value) }))} min={1} max={10000} />
             </div>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -118,7 +118,7 @@ export default function CaptchaKeys() {
                       <span className={`badge ${k.active ? 'badge-success' : 'badge-danger'}`}>{k.active ? '启用' : '禁用'}</span>
                     </div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                      <span>限速 {k.rate_limit}/h</span>
+                      <span>限速 {k.rate_limit}/min</span>
                       <span>调用 {k.use_count} 次</span>
                       {k.last_used && <span>最后使用 {new Date(k.last_used * 1000).toLocaleString('zh-CN')}</span>}
                     </div>
