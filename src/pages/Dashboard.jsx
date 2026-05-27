@@ -5,6 +5,7 @@ const CARDS = [
   { to: '/captcha-keys', icon: 'fa-key', title: '验证码 API Key', desc: '创建和管理 Captcha API Key，接入人机验证服务', color: '#4361ee' },
   { to: '/content-keys', icon: 'fa-code', title: '内容 API Key', desc: '管理内容 API Key，接入帖子和排行榜数据', color: '#06d6a0' },
   { to: '/oauth-clients', icon: 'fa-puzzle-piece', title: 'OAuth 应用', desc: '注册 OAuth 应用，实现第三方登录接入', color: '#7209b7' },
+  { to: '/docs/basic-concepts', icon: 'fa-lightbulb', title: '基础概念', desc: '了解开放平台的核心概念和开发流程', color: '#ffd166' },
   { to: '/docs/captcha', icon: 'fa-shield-halved', title: '验证码文档', desc: '查看 Captcha API 接入文档和示例代码', color: '#06d6a0' },
   { to: '/docs/content', icon: 'fa-book', title: '内容 API 文档', desc: '查看帖子、排行榜、纸尿裤数据 API 文档', color: '#ef476f' },
   { to: '/docs/oauth', icon: 'fa-book-open', title: 'OAuth 文档', desc: '查看 OAuth 2.0 授权流程和 API 参考', color: '#ef476f' },

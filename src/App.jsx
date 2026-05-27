@@ -8,6 +8,7 @@ import ContentKeys from './pages/ContentKeys';
 import DocsCaptcha from './pages/DocsCaptcha';
 import DocsContent from './pages/DocsContent';
 import DocsOAuth from './pages/DocsOAuth';
+import DocsBasicConcepts from './pages/DocsBasicConcepts';
 import Callback from './pages/Callback';
 import Login from './pages/Login';
 import './styles/global.css';
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/docs/captcha" element={<DocsCaptcha />} />
             <Route path="/docs/content" element={<DocsContent />} />
             <Route path="/docs/oauth" element={<DocsOAuth />} />
+            <Route path="/docs/basic-concepts" element={<DocsBasicConcepts />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
         </Routes>

@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: '/content-keys', icon: 'fa-code', label: '内容 API Key' },
   { to: '/oauth-clients', icon: 'fa-puzzle-piece', label: 'OAuth 应用' },
   { section: '开发文档' },
+  { to: '/docs/basic-concepts', icon: 'fa-lightbulb', label: '基础概念' },
   { to: '/docs/captcha', icon: 'fa-shield-halved', label: '验证码 API' },
   { to: '/docs/content', icon: 'fa-book', label: '内容 API' },
   { to: '/docs/oauth', icon: 'fa-book-open', label: 'OAuth 2.0' },
