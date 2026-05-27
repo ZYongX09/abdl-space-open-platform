@@ -32,7 +32,7 @@ export default function DocToc() {
           }
         }
       },
-      { rootMargin: '-80px 0px -60% 0px', threshold: 0 }
+      { rootMargin: '-100px 0px -40% 0px', threshold: 0 }
     );
 
     els.forEach(el => observerRef.current.observe(el));
@@ -43,7 +43,7 @@ export default function DocToc() {
   const scrollTo = useCallback(id => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, []);
 
