@@ -97,6 +97,62 @@ export default function DocsBasicConcepts() {
           </table>
         </section>
 
+        {/* URL 结构说明 */}
+        <section style={{ marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>URL 结构说明</h2>
+          <div className="card" style={{ fontSize: '0.85rem' }}>
+            <p>标准 URL 格式如下：</p>
+            <pre style={{ marginTop: '0.75rem' }}>{`[协议 Schema]://[域名 Domain]:[端口 Port]/[路径 Path]?[查询参数 Query]#[锚点 Fragment ID]`}</pre>
+            <p style={{ marginTop: '0.75rem', color: 'var(--text-muted)' }}>其中，端口号、查询参数、锚点 ID 均为可选项。</p>
+            <div style={{ margin: '1rem 0', textAlign: 'center' }}>
+              <img
+                src="https://img.abdl-space.top/file/open_URL.png"
+                alt="URL 结构示意图"
+                style={{ maxWidth: '100%', borderRadius: 8, border: '1px solid var(--border)' }}
+              />
+            </div>
+            <table className="doc-table" style={{ marginTop: '0.75rem' }}>
+              <thead>
+                <tr><th style={{ width: '30%' }}>组成部分</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>https</code></td>
+                  <td>HTTPS 安全传输协议，ABDL-Space 所有 API 仅支持 HTTPS</td>
+                </tr>
+                <tr>
+                  <td><code>api.abdl-space.top</code></td>
+                  <td>域名，表示请求的目标服务器，也可使用 IP 地址</td>
+                </tr>
+                <tr>
+                  <td><code>:443</code></td>
+                  <td>端口号。HTTPS 默认端口为 443，通常省略不写；HTTP 默认端口为 80</td>
+                </tr>
+                <tr>
+                  <td><code>/api/v1/captcha/create</code></td>
+                  <td>资源路径，指定要访问的 API 端点</td>
+                </tr>
+                <tr>
+                  <td><code>?page=1&limit=20</code></td>
+                  <td>查询参数，向服务器传递额外信息，多个参数用 <code>&</code> 连接</td>
+                </tr>
+                <tr>
+                  <td><code>#section</code></td>
+                  <td>锚点 ID，页面内跳转定位，API 调用中不使用</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: 'var(--input-bg)', borderRadius: 8, fontSize: '0.8rem' }}>
+              <strong>示例：</strong>
+              <pre style={{ marginTop: '0.5rem', background: 'transparent', padding: 0 }}>{`https://api.abdl-space.top:443/api/v1/content/posts?page=1&limit=20`}</pre>
+              <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
+                协议 = <code>https</code>，域名 = <code>api.abdl-space.top</code>，端口 = <code>443</code>（省略），
+                路径 = <code>/api/v1/content/posts</code>，查询参数 = <code>page=1&limit=20</code>
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* API 基础信息 */}
         <section style={{ marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>API 基础信息</h2>
