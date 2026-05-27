@@ -101,9 +101,9 @@ export default function DocsBasicConcepts() {
         <section style={{ marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>URL 结构说明</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
-            <p>标准 URL 格式如下：</p>
-            <pre style={{ marginTop: '0.75rem' }}>{`[协议 Schema]://[域名 Domain]:[端口 Port]/[路径 Path]?[查询参数 Query]#[锚点 Fragment ID]`}</pre>
-            <p style={{ marginTop: '0.75rem', color: 'var(--text-muted)' }}>其中，端口号、查询参数、锚点 ID 均为可选项。</p>
+            <p>URL 的标准格式：</p>
+            <pre style={{ marginTop: '0.75rem' }}>{`[传送协议 Schema]://[域名 Domain]:[端口号 Port]/[路径 Path][文件名]?[查询 Query]#[片段 ID]`}</pre>
+            <p style={{ marginTop: '0.75rem', color: 'var(--text-muted)' }}>其中，端口号、[查询]、[片段 ID] 都属于选填项。</p>
             <div style={{ margin: '1rem 0', textAlign: 'center' }}>
               <img
                 src="https://img.abdl-space.top/file/open_URL.png"
@@ -118,27 +118,31 @@ export default function DocsBasicConcepts() {
               <tbody>
                 <tr>
                   <td><code>https</code></td>
-                  <td>HTTPS 安全传输协议，ABDL-Space 所有 API 仅支持 HTTPS</td>
+                  <td>传送协议（Schema），HTTPS 安全传输协议。ABDL-Space 所有 API 仅支持 HTTPS</td>
                 </tr>
                 <tr>
                   <td><code>api.abdl-space.top</code></td>
-                  <td>域名，表示请求的目标服务器，也可使用 IP 地址</td>
+                  <td>域名（Domain），表示请求的目标 Web 服务器，也可使用 IP 地址</td>
                 </tr>
                 <tr>
                   <td><code>:443</code></td>
-                  <td>端口号。HTTPS 默认端口为 443，通常省略不写；HTTP 默认端口为 80</td>
+                  <td>端口号（Port）。HTTPS 默认端口为 443，通常省略不写；HTTP 默认端口为 80。使用非标准端口时必须显式指定</td>
                 </tr>
                 <tr>
-                  <td><code>/api/v1/captcha/create</code></td>
-                  <td>资源路径，指定要访问的 API 端点</td>
+                  <td><code>/api/v1/captcha</code></td>
+                  <td>路径（Path），资源在 Web 服务器上的位置</td>
+                </tr>
+                <tr>
+                  <td><code>/create</code></td>
+                  <td>文件名，指定要访问的具体资源</td>
                 </tr>
                 <tr>
                   <td><code>?page=1&limit=20</code></td>
-                  <td>查询参数，向服务器传递额外信息，多个参数用 <code>&</code> 连接</td>
+                  <td>查询参数（Query），向服务器传递的额外信息，多个参数用 <code>&</code> 连接</td>
                 </tr>
                 <tr>
                   <td><code>#section</code></td>
-                  <td>锚点 ID，页面内跳转定位，API 调用中不使用</td>
+                  <td>片段 ID（Fragment），页面内跳转定位，API 调用中不使用</td>
                 </tr>
               </tbody>
             </table>
@@ -146,8 +150,8 @@ export default function DocsBasicConcepts() {
               <strong>示例：</strong>
               <pre style={{ marginTop: '0.5rem', background: 'transparent', padding: 0 }}>{`https://api.abdl-space.top:443/api/v1/content/posts?page=1&limit=20`}</pre>
               <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-                协议 = <code>https</code>，域名 = <code>api.abdl-space.top</code>，端口 = <code>443</code>（省略），
-                路径 = <code>/api/v1/content/posts</code>，查询参数 = <code>page=1&limit=20</code>
+                传送协议 = <code>https</code>，域名 = <code>api.abdl-space.top</code>，端口号 = <code>443</code>（省略），
+                路径 = <code>/api/v1/content</code>，文件名 = <code>posts</code>，查询 = <code>page=1&limit=20</code>
               </p>
             </div>
           </div>
