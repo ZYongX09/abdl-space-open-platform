@@ -1,3 +1,4 @@
+import DocToc from '../components/DocToc';
 export default function DocsOAuth() {
   return (
     <>
@@ -6,9 +7,10 @@ export default function DocsOAuth() {
         <p>ABDL-Space OAuth 2.0 授权接入指南</p>
       </div>
       <div className="page-body" style={{ maxWidth: 720 }}>
+        <DocToc />
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>概述</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="overview">概述</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <p>ABDL-Space OAuth 2.0 支持 <strong>Authorization Code Grant</strong> 流程，并推荐使用 <strong>PKCE</strong> 增强安全性。</p>
             <p style={{ marginTop: '0.5rem' }}>适用于 Web 应用、移动应用、SPA 等场景的第三方登录接入。</p>
@@ -16,7 +18,7 @@ export default function DocsOAuth() {
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>授权流程</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="flow">授权流程</h2>
           <ol style={{ fontSize: '0.85rem', paddingLeft: '1.5rem', lineHeight: 2 }}>
             <li>用户点击"使用 ABDL Space 登录"</li>
             <li>跳转到 <code>/oauth/authorize</code>，用户确认授权</li>
@@ -27,7 +29,7 @@ export default function DocsOAuth() {
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Step 1: 引导用户授权</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="step1">Step 1: 引导用户授权</h2>
           <pre>{`GET https://api.abdl-space.top/api/oauth/authorize
   ?client_id=oc_your_client_id
   &redirect_uri=https://your-app.com/callback
@@ -39,7 +41,7 @@ export default function DocsOAuth() {
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Step 2: 用 code 换 token</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="step2">Step 2: 用 code 换 token</h2>
           <pre>{`POST https://api.abdl-space.top/api/oauth/token
 Content-Type: application/json
 
@@ -63,7 +65,7 @@ Content-Type: application/json
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Step 3: 刷新 Token</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="step3">Step 3: 刷新 Token</h2>
           <pre>{`POST https://api.abdl-space.top/api/oauth/token
 {
   "grant_type": "refresh_token",
@@ -74,7 +76,7 @@ Content-Type: application/json
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>API 端点</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="endpoints">API 端点</h2>
           <table className="doc-table">
             <thead><tr><th>端点</th><th>方法</th><th>说明</th></tr></thead>
             <tbody>
@@ -89,7 +91,7 @@ Content-Type: application/json
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>可用 Scopes</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="scopes">可用 Scopes</h2>
           <table className="doc-table">
             <thead><tr><th>Scope</th><th>说明</th></tr></thead>
             <tbody>
@@ -103,7 +105,7 @@ Content-Type: application/json
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>PKCE (推荐)</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="pkce">PKCE (推荐)</h2>
           <div className="card" style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             <p>公开客户端（SPA、移动应用）强烈推荐使用 PKCE 增强安全性：</p>
             <p style={{ marginTop: '0.5rem' }}>1. 生成 43-128 字符随机 <code>code_verifier</code></p>
@@ -114,7 +116,7 @@ Content-Type: application/json
         </section>
 
         <section>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>错误码</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="errors">错误码</h2>
           <table className="doc-table">
             <thead><tr><th>错误</th><th>说明</th></tr></thead>
             <tbody>

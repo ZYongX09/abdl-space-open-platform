@@ -1,3 +1,4 @@
+import DocToc from '../components/DocToc';
 export default function DocsCaptcha() {
   return (
     <>
@@ -6,9 +7,10 @@ export default function DocsCaptcha() {
         <p>ABDL-Space Captcha API 接入指南</p>
       </div>
       <div className="page-body" style={{ maxWidth: 720 }}>
+        <DocToc />
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>基础信息</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="base">基础信息</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <p>Base URL: <code>https://api.abdl-space.top/api/v1/captcha</code></p>
             <p>鉴权: <code>Authorization: Bearer cv_your_key</code></p>
@@ -17,7 +19,7 @@ export default function DocsCaptcha() {
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 id="post-create" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
             <span style={{ background: 'var(--primary)', color: '#fff', padding: '0.15rem 0.5rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700, marginRight: '0.5rem' }}>POST</span>
             /create
           </h2>
@@ -39,7 +41,7 @@ export default function DocsCaptcha() {
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 id="post-check" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
             <span style={{ background: 'var(--primary)', color: '#fff', padding: '0.15rem 0.5rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700, marginRight: '0.5rem' }}>POST</span>
             /check
           </h2>
@@ -61,7 +63,7 @@ export default function DocsCaptcha() {
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 id="get-types" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
             <span style={{ background: 'var(--success)', color: '#fff', padding: '0.15rem 0.5rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700, marginRight: '0.5rem' }}>GET</span>
             /types
           </h2>
@@ -71,7 +73,7 @@ export default function DocsCaptcha() {
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>调用示例</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="example">调用示例</h2>
           <pre>{`// 1. 创建验证会话
 const res = await fetch(
   'https://api.abdl-space.top/api/v1/captcha/create',
@@ -109,7 +111,7 @@ const { verified, token } = await result.json();`}</pre>
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Quantum 验证说明</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="quantum">Quantum 验证说明</h2>
           <div className="card" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             <p>Quantum 验证要求用户按高亮提示顺序点击 5 个节点（α, β, γ, δ, ε）。</p>
             <p style={{ marginTop: '0.5rem' }}>• <code>challenge.order</code> 包含正确节点顺序</p>
@@ -120,7 +122,7 @@ const { verified, token } = await result.json();`}</pre>
         </section>
 
         <section>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>错误码</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="errors">错误码</h2>
           <table className="doc-table">
             <thead><tr><th>状态码</th><th>说明</th></tr></thead>
             <tbody>

@@ -326,4 +326,55 @@ textarea.form-control { resize: vertical; font-family: inherit; }
   .page-header { padding: 1.25rem 1rem 1rem; }
   .page-body { padding: 1.25rem 1rem; }
   .mobile-header { display: flex; align-items: center; gap: 0.75rem; }
+  .doc-toc { display: none !important; }
+}
+
+/* ---- 文档目录导航 ---- */
+.doc-toc {
+  position: fixed;
+  top: 80px;
+  right: 2rem;
+  width: 200px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  font-size: 0.78rem;
+  z-index: 10;
+}
+
+.doc-toc-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.doc-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-left: 2px solid var(--border);
+}
+
+.doc-toc-link {
+  display: block;
+  padding: 0.35rem 0.75rem;
+  color: var(--text-muted);
+  text-decoration: none !important;
+  line-height: 1.4;
+  transition: color 0.15s, border-color 0.15s;
+  border-left: 2px solid transparent;
+  margin-left: -2px;
+}
+
+.doc-toc-link:hover {
+  color: var(--text);
+}
+
+.doc-toc-link.active {
+  color: var(--primary);
+  border-left-color: var(--primary);
+  font-weight: 600;
 }

@@ -1,3 +1,4 @@
+import DocToc from '../components/DocToc';
 export default function DocsBasicConcepts() {
   return (
     <>
@@ -6,10 +7,11 @@ export default function DocsBasicConcepts() {
         <p>ABDL-Space 开放平台接入前的核心概念与开发流程总览</p>
       </div>
       <div className="page-body" style={{ maxWidth: 720 }}>
+        <DocToc />
 
         {/* 概述 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>概述</h2>
+          <h2 id="overview" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>概述</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <p>本文档介绍通过 ABDL-Space 开放平台接入服务的完整流程。在正式开发前，建议先了解以下核心概念和操作流程。</p>
             <p style={{ marginTop: '0.5rem' }}>ABDL-Space 开放平台提供三类 API 服务：</p>
@@ -23,7 +25,7 @@ export default function DocsBasicConcepts() {
 
         {/* 基本概念 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>基本概念</h2>
+          <h2 id="concepts" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>基本概念</h2>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
             开发过程中涉及的核心概念如下：
           </p>
@@ -99,7 +101,7 @@ export default function DocsBasicConcepts() {
 
         {/* URL 结构说明 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>URL 结构说明</h2>
+          <h2 id="url-structure" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>URL 结构说明</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <p>URL 的标准格式：</p>
             <pre style={{ marginTop: '0.75rem' }}>{`[传送协议 Schema]://[域名 Domain]:[端口号 Port]/[路径 Path][文件名]?[查询 Query]#[片段 ID]`}</pre>
@@ -159,7 +161,7 @@ export default function DocsBasicConcepts() {
 
         {/* API 基础信息 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>API 基础信息</h2>
+          <h2 id="api-base" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>API 基础信息</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <table className="doc-table" style={{ marginBottom: 0 }}>
               <tbody>
@@ -186,7 +188,7 @@ export default function DocsBasicConcepts() {
 
         {/* 角色说明 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>角色说明</h2>
+          <h2 id="roles" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>角色说明</h2>
 
           <h3 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.5rem', marginTop: '1rem' }}>
             <i className="fa-solid fa-code" style={{ color: 'var(--primary)', marginRight: '0.5rem' }} />
@@ -216,7 +218,7 @@ export default function DocsBasicConcepts() {
 
         {/* 开发流程 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>开发流程</h2>
+          <h2 id="workflow" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>开发流程</h2>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
             接入 ABDL-Space 开放平台的标准流程如下：
           </p>
@@ -275,7 +277,7 @@ export default function DocsBasicConcepts() {
 
         {/* 快速导航 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>快速导航</h2>
+          <h2 id="navigation" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>快速导航</h2>
           <table className="doc-table">
             <thead>
               <tr><th>如果你需要…</th><th>查看</th></tr>
@@ -311,7 +313,7 @@ export default function DocsBasicConcepts() {
 
         {/* 安全建议 */}
         <section>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>安全建议</h2>
+          <h2 id="security" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>安全建议</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <ul style={{ paddingLeft: '1.5rem', lineHeight: 2.2 }}>
               <li><strong>密钥安全</strong> — <code>client_secret</code> 和 API Key 仅保存在服务端，不要暴露在前端代码、Git 仓库或日志中</li>

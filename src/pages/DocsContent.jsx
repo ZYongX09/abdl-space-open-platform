@@ -1,3 +1,4 @@
+import DocToc from '../components/DocToc';
 export default function DocsContent() {
   return (
     <>
@@ -6,10 +7,11 @@ export default function DocsContent() {
         <p>ABDL-Space Content API 接入指南 — 帖子、排行榜、纸尿裤数据</p>
       </div>
       <div className="page-body" style={{ maxWidth: 720 }}>
+        <DocToc />
 
         {/* 基础信息 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>基础信息</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="base">基础信息</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <p>Base URL: <code>https://api.abdl-space.top/api/v1/content</code></p>
             <p style={{ marginTop: '0.25rem' }}>鉴权: <code>Authorization: Bearer ak_your_key</code></p>
@@ -20,7 +22,7 @@ export default function DocsContent() {
 
         {/* 鉴权说明 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>鉴权方式</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="auth">鉴权方式</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <p>所有请求需要在 Header 中携带 API Key：</p>
             <pre style={{ marginTop: '0.5rem' }}>{`Authorization: Bearer ak_your_api_key`}</pre>
@@ -31,7 +33,7 @@ export default function DocsContent() {
 
         {/* 权限说明 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>权限说明</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="permissions">权限说明</h2>
           <table className="doc-table">
             <thead><tr><th>权限</th><th>说明</th><th>可用端点</th></tr></thead>
             <tbody>
@@ -44,7 +46,7 @@ export default function DocsContent() {
 
         {/* 帖子列表 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 id="get-posts" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
             <span style={{ background: 'var(--success)', color: '#fff', padding: '0.15rem 0.5rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700, marginRight: '0.5rem' }}>GET</span>
             /posts
           </h2>
@@ -89,7 +91,7 @@ export default function DocsContent() {
 
         {/* 帖子详情 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 id="get-post-detail" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
             <span style={{ background: 'var(--success)', color: '#fff', padding: '0.15rem 0.5rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700, marginRight: '0.5rem' }}>GET</span>
             /posts/:id
           </h2>
@@ -132,7 +134,7 @@ export default function DocsContent() {
 
         {/* 排行榜 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 id="get-rankings" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
             <span style={{ background: 'var(--success)', color: '#fff', padding: '0.15rem 0.5rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700, marginRight: '0.5rem' }}>GET</span>
             /rankings
           </h2>
@@ -168,7 +170,7 @@ export default function DocsContent() {
 
         {/* 纸尿裤列表 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+          <h2 id="get-diapers" style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
             <span style={{ background: 'var(--success)', color: '#fff', padding: '0.15rem 0.5rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700, marginRight: '0.5rem' }}>GET</span>
             /diapers
           </h2>
@@ -209,7 +211,7 @@ export default function DocsContent() {
 
         {/* 调用示例 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>调用示例</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="example">调用示例</h2>
           <pre>{`// JavaScript / Fetch
 const API_KEY = 'ak_your_api_key';
 const BASE = 'https://api.abdl-space.top/api/v1/content';
@@ -231,7 +233,7 @@ const diapers = await fetch(BASE + '/diapers?search=品牌名', {
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Python 示例</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="python">Python 示例</h2>
           <pre>{`import requests
 
 API_KEY = "ak_your_api_key"
@@ -247,7 +249,7 @@ for post in data["posts"]:
 
         {/* 频率限制 */}
         <section style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>频率限制</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="ratelimit">频率限制</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <p>默认速率限制为 <strong>200 次/分钟</strong>（创建 Key 时可自定义，范围 1-10000）。全局上限为 120 次/分钟，实际限制 = min(你的 Key 限速, 120)。</p>
             <p style={{ marginTop: '0.5rem' }}>超限返回 <code>429 Too Many Requests</code>，请做好重试和退避逻辑。</p>
@@ -261,7 +263,7 @@ for post in data["posts"]:
 
         {/* 错误码 */}
         <section>
-          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>错误码</h2>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="errors">错误码</h2>
           <table className="doc-table">
             <thead><tr><th>状态码</th><th>说明</th></tr></thead>
             <tbody>
