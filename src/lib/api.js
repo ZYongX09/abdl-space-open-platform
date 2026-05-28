@@ -50,3 +50,22 @@ export const contentKeysAPI = {
   update: (id, data) => apiFetch(`/api/content/keys/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
   delete: (id) => apiFetch(`/api/content/keys/${id}`, { method: 'DELETE' }),
 };
+
+/* ============================================================
+ * Key Split — API Key 代理与统计
+ * ============================================================ */
+export const keySplitAPI = {
+  listChannels: () => apiFetch('/api/key-split/channels'),
+  createChannel: (data) => apiFetch('/api/key-split/channels', { method: 'POST', body: JSON.stringify(data) }),
+  updateChannel: (id, data) => apiFetch(`/api/key-split/channels/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteChannel: (id) => apiFetch(`/api/key-split/channels/${id}`, { method: 'DELETE' }),
+  testChannel: (id) => apiFetch(`/api/key-split/channels/${id}/test`, { method: 'POST' }),
+  listKeys: () => apiFetch('/api/key-split/keys'),
+  createKey: (data) => apiFetch('/api/key-split/keys', { method: 'POST', body: JSON.stringify(data) }),
+  updateKey: (id, data) => apiFetch(`/api/key-split/keys/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteKey: (id) => apiFetch(`/api/key-split/keys/${id}`, { method: 'DELETE' }),
+  resetQuota: (id) => apiFetch(`/api/key-split/keys/${id}/reset`, { method: 'POST' }),
+  getStats: (days = 7) => apiFetch(`/api/key-split/usage/stats?days=${days}`),
+  getLogs: (page = 1, limit = 50) => apiFetch(`/api/key-split/usage/logs?page=${page}&limit=${limit}`),
+  getDashboard: () => apiFetch('/api/key-split/stats'),
+};

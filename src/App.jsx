@@ -9,6 +9,10 @@ import DocsCaptcha from './pages/DocsCaptcha';
 import DocsContent from './pages/DocsContent';
 import DocsOAuth from './pages/DocsOAuth';
 import DocsBasicConcepts from './pages/DocsBasicConcepts';
+import KeySplitDashboard from './pages/KeySplitDashboard';
+import KeySplitKeys from './pages/KeySplitKeys';
+import KeySplitChannels from './pages/KeySplitChannels';
+import KeySplitLogs from './pages/KeySplitLogs';
 import Callback from './pages/Callback';
 import Login from './pages/Login';
 import './styles/global.css';
@@ -29,6 +33,10 @@ export default function App() {
             <Route path="/docs/content" element={<DocsContent />} />
             <Route path="/docs/oauth" element={<DocsOAuth />} />
             <Route path="/docs/basic-concepts" element={<DocsBasicConcepts />} />
+            <Route path="/key-split" element={<KeySplitDashboard />} />
+            <Route path="/key-split/keys" element={<KeySplitKeys />} />
+            <Route path="/key-split/channels" element={<KeySplitChannels />} />
+            <Route path="/key-split/logs" element={<KeySplitLogs />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
         </Routes>

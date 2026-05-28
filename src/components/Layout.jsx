@@ -12,6 +12,11 @@ const NAV_ITEMS = [
   { to: '/docs/captcha', icon: 'fa-shield-halved', label: '验证码 API' },
   { to: '/docs/content', icon: 'fa-book', label: '内容 API' },
   { to: '/docs/oauth', icon: 'fa-book-open', label: 'OAuth 2.0' },
+  { section: 'Key Split' },
+  { to: '/key-split', icon: 'fa-chart-pie', label: '仪表盘' },
+  { to: '/key-split/keys', icon: 'fa-key', label: '子 Key 管理' },
+  { to: '/key-split/channels', icon: 'fa-link', label: '渠道管理' },
+  { to: '/key-split/logs', icon: 'fa-list', label: '用量日志' },
 ];
 
 export default function Layout() {
