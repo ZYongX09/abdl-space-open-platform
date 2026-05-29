@@ -5,7 +5,12 @@ import { captchaKeysAPI, contentKeysAPI, oauthClientsAPI, keySplitAPI } from '..
 
 export default function Dashboard() {
   const { user } = useAuth()
-  const [counts, setCounts] = useState({ captcha: 0, content: 0, oauth: 0, ksKeys: 0, ksChannels: 0, ksTokens: 0 })
+  const [counts, setCounts] = useState({
+    captchaKeys: 0, captchaCalls: 0,
+    contentKeys: 0, contentCalls: 0,
+    oauthClients: 0,
+    ksKeys: 0, ksChannels: 0, ksTokens: 0, ksCalls: 0,
+  })
 
   useEffect(() => {
     Promise.allSettled([
@@ -14,13 +19,21 @@ export default function Dashboard() {
       oauthClientsAPI.list(),
       keySplitAPI.getDashboard(),
     ]).then(([captcha, content, oauth, ks]) => {
+      const captchaKeys = captcha.status === 'fulfilled' ? (captcha.value?.keys || []) : []
+      const contentKeys = content.status === 'fulfilled' ? (content.value?.keys || []) : []
+      const oauthClients = oauth.status === 'fulfilled' ? (oauth.value?.clients || []) : []
+      const ksData = ks.status === 'fulfilled' ? ks.value : {}
+
       setCounts({
-        captcha: captcha.status === 'fulfilled' ? (captcha.value?.length || 0) : 0,
-        content: content.status === 'fulfilled' ? (content.value?.length || 0) : 0,
-        oauth: oauth.status === 'fulfilled' ? (oauth.value?.length || 0) : 0,
-        ksKeys: ks.status === 'fulfilled' ? (ks.value?.subKeys || 0) : 0,
-        ksChannels: ks.status === 'fulfilled' ? (ks.value?.channels || 0) : 0,
-        ksTokens: ks.status === 'fulfilled' ? (ks.value?.totalTokens || 0) : 0,
+        captchaKeys: captchaKeys.length,
+        captchaCalls: captchaKeys.reduce((sum, k) => sum + (k.use_count || 0), 0),
+        contentKeys: contentKeys.length,
+        contentCalls: contentKeys.reduce((sum, k) => sum + (k.use_count || 0), 0),
+        oauthClients: oauthClients.length,
+        ksKeys: ksData.subKeys || 0,
+        ksChannels: ksData.channels || 0,
+        ksTokens: ksData.totalTokens || 0,
+        ksCalls: ksData.totalRequests || 0,
       })
     })
   }, [])
@@ -34,13 +47,13 @@ export default function Dashboard() {
       <div className="page-body">
 
         {/* ── 统计卡片 ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
-          <StatCard icon="fa-shield-halved" color="#4361ee" label="验证码 Key" value={counts.captcha} to="/captcha-keys" />
-          <StatCard icon="fa-code" color="#06d6a0" label="内容 Key" value={counts.content} to="/content-keys" />
-          <StatCard icon="fa-puzzle-piece" color="#7209b7" label="OAuth 应用" value={counts.oauth} to="/oauth-clients" />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+          <StatCard icon="fa-shield-halved" color="#4361ee" label="验证码 Key" value={counts.captchaKeys} sub={`${counts.captchaCalls.toLocaleString()} 次调用`} to="/captcha-keys" />
+          <StatCard icon="fa-code" color="#06d6a0" label="内容 Key" value={counts.contentKeys} sub={`${counts.contentCalls.toLocaleString()} 次调用`} to="/content-keys" />
+          <StatCard icon="fa-puzzle-piece" color="#7209b7" label="OAuth 应用" value={counts.oauthClients} to="/oauth-clients" />
           <StatCard icon="fa-key" color="var(--primary)" label="KS 子 Key" value={counts.ksKeys} to="/key-split" />
           <StatCard icon="fa-link" color="#f59e0b" label="KS 渠道" value={counts.ksChannels} to="/key-split" />
-          <StatCard icon="fa-coins" color="#10b981" label="KS 总 Token" value={counts.ksTokens > 0 ? `${(counts.ksTokens / 1000).toFixed(0)}k` : '0'} to="/key-split" />
+          <StatCard icon="fa-bolt" color="#8b5cf6" label="KS 调用" value={counts.ksCalls.toLocaleString()} sub={`${counts.ksTokens.toLocaleString()} Token`} to="/key-split" />
         </div>
 
         {/* ── 快捷入口 ── */}
@@ -65,7 +78,7 @@ export default function Dashboard() {
   )
 }
 
-function StatCard({ icon, color, label, value, to }) {
+function StatCard({ icon, color, label, value, sub, to }) {
   const content = (
     <div className="card" style={{ display: 'flex', alignItems: 'center', gap: '.75rem', padding: '.9rem', cursor: to ? 'pointer' : 'default', transition: 'all 0.15s' }}>
       <div style={{
@@ -77,6 +90,7 @@ function StatCard({ icon, color, label, value, to }) {
       <div style={{ minWidth: 0 }}>
         <div style={{ fontSize: '1.15rem', fontWeight: 700, lineHeight: 1.2 }}>{value}</div>
         <div style={{ fontSize: '.7rem', color: 'var(--text-muted)' }}>{label}</div>
+        {sub && <div style={{ fontSize: '.65rem', color: 'var(--text-light)', marginTop: '1px' }}>{sub}</div>}
       </div>
     </div>
   )
