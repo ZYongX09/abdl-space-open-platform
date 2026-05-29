@@ -23,7 +23,9 @@ export default function KeySplitLogs() {
         <div className="card">
           <table className="doc-table">
             <thead><tr><th>时间</th><th>Key</th><th>渠道</th><th>模型</th><th>输入</th><th>输出</th><th>总计</th><th>延迟</th><th>状态</th></tr></thead>
-            <tbody>{logs.map(l => (
+            <tbody>{logs.length === 0 ? (
+              <tr><td colSpan={9} style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '2rem' }}>暂无日志</td></tr>
+            ) : logs.map(l => (
               <tr key={l.id}>
                 <td>{new Date(l.request_at * 1000).toLocaleString('zh-CN')}</td>
                 <td><code>{l.key_prefix}***</code></td>

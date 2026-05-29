@@ -22,14 +22,16 @@ export default function KeySplitChannels() {
   const test = async (id) => {
     try {
       const r = await keySplitAPI.testChannel(id)
-      alert(r.status === 200 ? '✅ 连接成功' : `❌ 连接失败 (${r.status})`)
+      alert(r.ok ? '✅ 连接成功' : `❌ 连接失败 (${r.status})`)
     } catch (e) { alert(e.message) }
   }
 
   const remove = async (id) => {
     if (!confirm('确定删除？')) return
-    await keySplitAPI.deleteChannel(id)
-    load()
+    try {
+      await keySplitAPI.deleteChannel(id)
+      load()
+    } catch (e) { alert(e.message) }
   }
 
   return (
