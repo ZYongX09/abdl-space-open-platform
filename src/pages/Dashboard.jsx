@@ -1,18 +1,29 @@
-import { Link } from 'react-router-dom';
-import { useAuth } from '../lib/AuthContext';
-
-const CARDS = [
-  { to: '/captcha-keys', icon: 'fa-key', title: '验证码 API Key', desc: '创建和管理 Captcha API Key，接入人机验证服务', color: '#4361ee' },
-  { to: '/content-keys', icon: 'fa-code', title: '内容 API Key', desc: '管理内容 API Key，接入帖子和排行榜数据', color: '#06d6a0' },
-  { to: '/oauth-clients', icon: 'fa-puzzle-piece', title: 'OAuth 应用', desc: '注册 OAuth 应用，实现第三方登录接入', color: '#7209b7' },
-  { to: '/docs/basic-concepts', icon: 'fa-lightbulb', title: '基础概念', desc: '了解开放平台的核心概念和开发流程', color: '#ffd166' },
-  { to: '/docs/captcha', icon: 'fa-shield-halved', title: '验证码文档', desc: '查看 Captcha API 接入文档和示例代码', color: '#06d6a0' },
-  { to: '/docs/content', icon: 'fa-book', title: '内容 API 文档', desc: '查看帖子、排行榜、纸尿裤数据 API 文档', color: '#ef476f' },
-  { to: '/docs/oauth', icon: 'fa-book-open', title: 'OAuth 文档', desc: '查看 OAuth 2.0 授权流程和 API 参考', color: '#ef476f' },
-];
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../lib/AuthContext'
+import { captchaKeysAPI, contentKeysAPI, oauthClientsAPI, keySplitAPI } from '../lib/api'
 
 export default function Dashboard() {
-  const { user } = useAuth();
+  const { user } = useAuth()
+  const [counts, setCounts] = useState({ captcha: 0, content: 0, oauth: 0, ksKeys: 0, ksChannels: 0, ksTokens: 0 })
+
+  useEffect(() => {
+    Promise.allSettled([
+      captchaKeysAPI.list(),
+      contentKeysAPI.list(),
+      oauthClientsAPI.list(),
+      keySplitAPI.getDashboard(),
+    ]).then(([captcha, content, oauth, ks]) => {
+      setCounts({
+        captcha: captcha.status === 'fulfilled' ? (captcha.value?.length || 0) : 0,
+        content: content.status === 'fulfilled' ? (content.value?.length || 0) : 0,
+        oauth: oauth.status === 'fulfilled' ? (oauth.value?.length || 0) : 0,
+        ksKeys: ks.status === 'fulfilled' ? (ks.value?.subKeys || 0) : 0,
+        ksChannels: ks.status === 'fulfilled' ? (ks.value?.channels || 0) : 0,
+        ksTokens: ks.status === 'fulfilled' ? (ks.value?.totalTokens || 0) : 0,
+      })
+    })
+  }, [])
 
   return (
     <>
@@ -21,6 +32,19 @@ export default function Dashboard() {
         <p>欢迎回来，{user?.username}</p>
       </div>
       <div className="page-body">
+
+        {/* ── 统计卡片 ── */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+          <StatCard icon="fa-shield-halved" color="#4361ee" label="验证码 Key" value={counts.captcha} to="/captcha-keys" />
+          <StatCard icon="fa-code" color="#06d6a0" label="内容 Key" value={counts.content} to="/content-keys" />
+          <StatCard icon="fa-puzzle-piece" color="#7209b7" label="OAuth 应用" value={counts.oauth} to="/oauth-clients" />
+          <StatCard icon="fa-key" color="var(--primary)" label="KS 子 Key" value={counts.ksKeys} to="/key-split" />
+          <StatCard icon="fa-link" color="#f59e0b" label="KS 渠道" value={counts.ksChannels} to="/key-split" />
+          <StatCard icon="fa-coins" color="#10b981" label="KS 总 Token" value={counts.ksTokens > 0 ? `${(counts.ksTokens / 1000).toFixed(0)}k` : '0'} to="/key-split" />
+        </div>
+
+        {/* ── 快捷入口 ── */}
+        <h2 style={{ fontSize: '.95rem', fontWeight: 700, marginBottom: '.75rem' }}>快捷入口</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
           {CARDS.map(card => (
             <Link key={card.to} to={card.to} style={{ textDecoration: 'none' }}>
@@ -38,5 +62,39 @@ export default function Dashboard() {
         </div>
       </div>
     </>
-  );
+  )
 }
+
+function StatCard({ icon, color, label, value, to }) {
+  const content = (
+    <div className="card" style={{ display: 'flex', alignItems: 'center', gap: '.75rem', padding: '.9rem', cursor: to ? 'pointer' : 'default', transition: 'all 0.15s' }}>
+      <div style={{
+        width: 36, height: 36, borderRadius: 9, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: `${color}15`, color, fontSize: '.9rem', flexShrink: 0
+      }}>
+        <i className={`fa-solid ${icon}`} />
+      </div>
+      <div style={{ minWidth: 0 }}>
+        <div style={{ fontSize: '1.15rem', fontWeight: 700, lineHeight: 1.2 }}>{value}</div>
+        <div style={{ fontSize: '.7rem', color: 'var(--text-muted)' }}>{label}</div>
+      </div>
+    </div>
+  )
+
+  if (to) {
+    return <Link to={to} style={{ textDecoration: 'none', color: 'inherit' }}>{content}</Link>
+  }
+  return content
+}
+
+const CARDS = [
+  { to: '/captcha-keys', icon: 'fa-key', title: '验证码 API Key', desc: '创建和管理 Captcha API Key，接入人机验证服务', color: '#4361ee' },
+  { to: '/content-keys', icon: 'fa-code', title: '内容 API Key', desc: '管理内容 API Key，接入帖子和排行榜数据', color: '#06d6a0' },
+  { to: '/oauth-clients', icon: 'fa-puzzle-piece', title: 'OAuth 应用', desc: '注册 OAuth 应用，实现第三方登录接入', color: '#7209b7' },
+  { to: '/key-split', icon: 'fa-chart-pie', title: 'Key Split', desc: 'API Key 代理服务，管理子 Key 和用量统计', color: 'var(--primary)' },
+  { to: '/docs/basic-concepts', icon: 'fa-lightbulb', title: '基础概念', desc: '了解开放平台的核心概念和开发流程', color: '#ffd166' },
+  { to: '/docs/key-split', icon: 'fa-book', title: 'Key Split 文档', desc: '查看 Key Split API 接入文档和示例代码', color: '#ef476f' },
+  { to: '/docs/captcha', icon: 'fa-shield-halved', title: '验证码文档', desc: '查看 Captcha API 接入文档和示例代码', color: '#06d6a0' },
+  { to: '/docs/content', icon: 'fa-book', title: '内容 API 文档', desc: '查看帖子、排行榜、纸尿裤数据 API 文档', color: '#ef476f' },
+  { to: '/docs/oauth', icon: 'fa-book-open', title: 'OAuth 文档', desc: '查看 OAuth 2.0 授权流程和 API 参考', color: '#ef476f' },
+]
