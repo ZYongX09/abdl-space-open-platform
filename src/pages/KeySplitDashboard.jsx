@@ -15,7 +15,7 @@ export default function KeySplitDashboard() {
   const daily = usageStats?.daily || []
   const byKey = usageStats?.byKey || []
   const byModel = usageStats?.byModel || []
-  const successRate = t.requests > 0 ? Math.round((t.success || 0) / t.requests * 100) : 0
+  const successRate = (stats?.totalRequests || 0) > 0 ? Math.round((stats?.successRequests || 0) / stats.totalRequests * 100) : 0
   const maxDailyTokens = daily.length > 0 ? Math.max(...daily.map(d => d.tokens || 0)) : 1
 
   return (
@@ -34,13 +34,15 @@ export default function KeySplitDashboard() {
         </div>
 
         {/* ── 核心指标卡片 ── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
           <StatCard icon="fa-key" color="var(--primary)" label="子 Key" value={stats?.subKeys || 0} />
           <StatCard icon="fa-link" color="#f59e0b" label="渠道" value={stats?.channels || 0} />
-          <StatCard icon="fa-coins" color="#10b981" label={`${days}天 Token`} value={(t.total || 0).toLocaleString()} />
-          <StatCard icon="fa-bolt" color="#8b5cf6" label={`${days}天请求`} value={(t.requests || 0).toLocaleString()} />
+          <StatCard icon="fa-bolt" color="#8b5cf6" label="今日请求" value={(stats?.todayRequests || 0).toLocaleString()} />
+          <StatCard icon="fa-list" color="#06b6d4" label="总请求" value={(stats?.totalRequests || 0).toLocaleString()} />
+          <StatCard icon="fa-coins" color="#10b981" label="总 Token" value={(stats?.totalTokens || 0).toLocaleString()} />
           <StatCard icon="fa-check-circle" color={successRate >= 95 ? '#10b981' : successRate >= 80 ? '#f59e0b' : '#ef4444'} label="成功率" value={`${successRate}%`} />
-          <StatCard icon="fa-clock" color="#06b6d4" label="平均延迟" value={t.avg_latency ? `${t.avg_latency}ms` : '-'} />
+          <StatCard icon="fa-clock" color="var(--primary)" label="平均延迟" value={stats?.avgLatency ? `${stats.avgLatency}ms` : '-'} />
+          <StatCard icon="fa-microchip" color="#ef4444" label="热门模型" value={stats?.topModel || '-'} />
         </div>
 
         {/* ── 每日趋势 ── */}
