@@ -13,6 +13,7 @@ import KeySplitDashboard from './pages/KeySplitDashboard';
 import KeySplitKeys from './pages/KeySplitKeys';
 import KeySplitChannels from './pages/KeySplitChannels';
 import KeySplitLogs from './pages/KeySplitLogs';
+import DocsKeySplit from './pages/DocsKeySplit';
 import Callback from './pages/Callback';
 import Login from './pages/Login';
 import './styles/global.css';
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/docs/captcha" element={<DocsCaptcha />} />
             <Route path="/docs/content" element={<DocsContent />} />
             <Route path="/docs/oauth" element={<DocsOAuth />} />
+            <Route path="/docs/key-split" element={<DocsKeySplit />} />
             <Route path="/docs/basic-concepts" element={<DocsBasicConcepts />} />
             <Route path="/key-split" element={<KeySplitDashboard />} />
             <Route path="/key-split/keys" element={<KeySplitKeys />} />
