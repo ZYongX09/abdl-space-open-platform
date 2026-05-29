@@ -372,7 +372,7 @@ console.log(response.choices[0].message.content);`}</pre>
                 <tr>
                   <td>Token 额度</td>
                   <td>无限</td>
-                  <td>子 Key 的 token 总量上限，设为 -1 表示无限</td>
+                  <td>子 Key 的 token 总量上限，设为 -1 表示无限。Token 数来自上游 API 返回的 usage 字段，不同厂商的计算方式可能不同。</td>
                 </tr>
                 <tr>
                   <td>请求体大小</td>
