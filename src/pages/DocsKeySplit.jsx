@@ -235,6 +235,9 @@ console.log(response.choices[0].message.content);`}</pre>
         <section style={{ marginBottom: '2rem' }}>
           <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="parameters">模型参数说明</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
+            <p style={{ marginBottom: '0.75rem', color: 'var(--text-muted)' }}>
+              以下为 OpenAI API 格式支持的通用参数。实际支持哪些参数取决于上游模型，部分参数可能被忽略或不生效。
+            </p>
             <table className="doc-table">
               <thead>
                 <tr><th>参数</th><th>范围</th><th>默认值</th><th>说明</th></tr>
