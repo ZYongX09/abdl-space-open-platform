@@ -121,7 +121,31 @@ const { verified, token } = await result.json();`}</pre>
           </div>
         </section>
 
-        <section>
+                <section style={{ marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="risk">
+            <span style={{ background: '#f59e0b', color: '#fff', padding: '0.15rem 0.5rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700, marginRight: '0.5rem' }}>POST</span>
+            /risk
+          </h2>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>获取风险等级和验证流程</p>
+          <pre>{`// Response\n{\n  "risk": "low",
+  "flow": "turnstile",
+  "turnstile_site_key": "0x4A..."\n}`}</pre>
+          <ul style={{ fontSize: '0.8rem', paddingLeft: '1.5rem', margin: '0.5rem 0 0' }}>
+            <li><code>low</code> → 随机选 Turnstile 或 Quantum</li>
+            <li><code>high</code> → 先 Turnstile 再 Quantum</li>
+          </ul>
+        </section>
+
+        <section style={{ marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="turnstile">
+            <span style={{ background: '#f59e0b', color: '#fff', padding: '0.15rem 0.5rem', borderRadius: 4, fontSize: '0.7rem', fontWeight: 700, marginRight: '0.5rem' }}>POST</span>
+            /turnstile/verify
+          </h2>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>验证 Cloudflare Turnstile token</p>
+          <pre>{`// Request\n{ "session_id": "...", "token": "***" }\n// Response\n{ "success": true }`}</pre>
+        </section>
+
+<section>
           <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="errors">错误码</h2>
           <table className="doc-table">
             <thead><tr><th>状态码</th><th>说明</th></tr></thead>
