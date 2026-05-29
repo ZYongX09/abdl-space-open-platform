@@ -236,7 +236,7 @@ console.log(response.choices[0].message.content);`}</pre>
           <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }} id="parameters">模型参数说明</h2>
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <p style={{ marginBottom: '0.75rem', color: 'var(--text-muted)' }}>
-              以下为 OpenAI API 格式支持的通用参数。实际支持哪些参数取决于上游模型，部分参数可能被忽略或不生效。
+              以下为 OpenAI API 格式支持的常用参数。Key Split 作为代理会将参数原样透传给上游模型，实际支持哪些参数取决于上游服务商。
             </p>
             <table className="doc-table">
               <thead>
