@@ -160,8 +160,12 @@ export default function DocsKeySplit() {
 // 流式响应（SSE）
 data: {"id":"chatcmpl-xxx","choices":[{"delta":{"content":"你"}}]}
 data: {"id":"chatcmpl-xxx","choices":[{"delta":{"content":"好"}}]}
+data: {"id":"chatcmpl-xxx","choices":[{"delta":{}}]}
 data: {"id":"chatcmpl-xxx","choices":[{"delta":{},"finish_reason":"stop"}],"usage":{"prompt_tokens":25,"completion_tokens":2,"total_tokens":27}}
-data: [DONE]`}</pre>
+data: [DONE]`}
+<p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
+  注意: usage 字段通常出现在流式响应的最后一个 chunk 中，且仅在上游返回时才包含。
+</p></pre>
         </section>
 
         {/* ═══════════════ Python SDK ═══════════════ */}
@@ -301,8 +305,8 @@ console.log(response.choices[0].message.content);`}</pre>
                 <tr>
                   <td><code>401</code></td>
                   <td>Missing API key</td>
-                  <td>未提供 Authorization 头</td>
-                  <td>检查请求头是否包含 <code>Authorization: Bearer sk-xxx</code></td>
+                  <td>未提供 Authorization 头，或 Key 格式不正确（长度不足）</td>
+                  <td>检查请求头是否包含 <code>Authorization: Bearer sk-***</code>，Key 长度是否足够</td>
                 </tr>
                 <tr>
                   <td><code>401</code></td>
@@ -318,8 +322,8 @@ console.log(response.choices[0].message.content);`}</pre>
                 </tr>
                 <tr>
                   <td><code>429</code></td>
-                  <td>Rate limit exceeded</td>
-                  <td>子 Key 请求频率超过限制</td>
+                  <td>Rate limit exceeded (N req/min)</td>
+                  <td>子 Key 请求频率超过限制，N 为该子 Key 的实际限制值</td>
                   <td>降低请求频率，或联系管理员提高限额</td>
                 </tr>
                 <tr>
@@ -360,7 +364,7 @@ console.log(response.choices[0].message.content);`}</pre>
                 <tr>
                   <td>速率限制</td>
                   <td>60 次/分钟</td>
-                  <td>每个子 Key 每分钟最多请求数，由管理员自定义</td>
+                  <td>每个子 Key 每分钟最多请求数，由管理员自定义。设为 0 可完全禁用速率限制。</td>
                 </tr>
                 <tr>
                   <td>Token 额度</td>
