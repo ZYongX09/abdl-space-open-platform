@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { to: '/docs/captcha', icon: 'fa-shield-halved', label: '验证码 API' },
   { to: '/docs/content', icon: 'fa-book', label: '内容 API' },
   { to: '/docs/oauth', icon: 'fa-book-open', label: 'OAuth 2.0' },
+  { to: '/docs/mastodon', icon: 'fa-brands fa-mastodon', label: 'Mastodon API' },
   { section: 'Key Split' },
   { to: '/key-split', icon: 'fa-chart-pie', label: '仪表盘' },
   { to: '/key-split/keys', icon: 'fa-key', label: '子 Key 管理' },

@@ -8,6 +8,7 @@ import ContentKeys from './pages/ContentKeys';
 import DocsCaptcha from './pages/DocsCaptcha';
 import DocsContent from './pages/DocsContent';
 import DocsOAuth from './pages/DocsOAuth';
+import DocsMastodon from './pages/DocsMastodon';
 import DocsBasicConcepts from './pages/DocsBasicConcepts';
 import KeySplitDashboard from './pages/KeySplitDashboard';
 import KeySplitKeys from './pages/KeySplitKeys';
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/docs/captcha" element={<DocsCaptcha />} />
             <Route path="/docs/content" element={<DocsContent />} />
             <Route path="/docs/oauth" element={<DocsOAuth />} />
+            <Route path="/docs/mastodon" element={<DocsMastodon />} />
             <Route path="/docs/key-split" element={<DocsKeySplit />} />
             <Route path="/docs/basic-concepts" element={<DocsBasicConcepts />} />
             <Route path="/key-split" element={<KeySplitDashboard />} />
