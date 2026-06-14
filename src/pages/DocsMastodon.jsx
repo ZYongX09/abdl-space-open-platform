@@ -152,6 +152,58 @@ export default function DocsMastodon() {
               <tr><td><code>GET /api/v2/search</code></td><td>搜索（v2）</td></tr>
             </tbody>
           </table>
+
+          <h3 style={{ fontSize: '0.95rem', fontWeight: 600, marginTop: '1rem', marginBottom: '0.5rem' }}>Push 推送</h3>
+          <table className="doc-table">
+            <thead><tr><th>端点</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td><code>POST /api/v1/push/subscription</code></td><td>创建推送订阅</td></tr>
+              <tr><td><code>GET /api/v1/push/subscription</code></td><td>查询当前订阅</td></tr>
+              <tr><td><code>PUT /api/v1/push/subscription</code></td><td>更新 alert 设置</td></tr>
+              <tr><td><code>DELETE /api/v1/push/subscription</code></td><td>删除订阅</td></tr>
+            </tbody>
+          </table>
+          <div className="card" style={{ fontSize: '0.85rem', marginTop: '0.5rem' }}>
+            <p>支持的 alert 类型：<code>follow</code>、<code>favourite</code>、<code>reblog</code>、<code>mention</code>、<code>poll</code>、<code>status</code></p>
+            <p style={{ marginTop: '0.5rem', color: 'var(--text-muted)' }}>实际推送需要在 Wrangler 配置 <code>VAPID_PUBLIC_KEY</code> 和 <code>VAPID_PRIVATE_KEY</code> 环境变量。<code>push_subscriptions</code> 表自动创建。</p>
+          </div>
+
+          <h3 style={{ fontSize: '0.95rem', fontWeight: 600, marginTop: '1rem', marginBottom: '0.5rem' }}>ABDL 自定义端点 <code>/api/v1/abdl/*</code></h3>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>以 Mastodon API 风格暴露 ABDL 专属功能。原有 ABDL API 不受影响。</p>
+
+          <h4 style={{ fontSize: '0.9rem', fontWeight: 600, marginTop: '0.75rem', marginBottom: '0.25rem' }}>纸尿裤</h4>
+          <table className="doc-table">
+            <thead><tr><th>端点</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td><code>GET /api/v1/abdl/diapers</code></td><td>纸尿裤列表（search/brand/sort/order/page/limit）</td></tr>
+              <tr><td><code>GET /api/v1/abdl/diapers/:id</code></td><td>纸尿裤详情（含尺寸、图片）</td></tr>
+              <tr><td><code>GET /api/v1/abdl/diapers/:id/ratings</code></td><td>评分列表 + 分维度统计</td></tr>
+              <tr><td><code>GET /api/v1/abdl/diapers/:id/feelings</code></td><td>感受列表 + 统计</td></tr>
+              <tr><td><code>GET /api/v1/abdl/diapers/brands</code></td><td>品牌列表</td></tr>
+              <tr><td><code>GET /api/v1/abdl/diapers/sizes</code></td><td>尺码标签列表</td></tr>
+              <tr><td><code>GET /api/v1/abdl/diapers/compare</code></td><td>纸尿裤对比（ids=1,2,3，最多 5 款）</td></tr>
+            </tbody>
+          </table>
+
+          <h4 style={{ fontSize: '0.9rem', fontWeight: 600, marginTop: '0.75rem', marginBottom: '0.25rem' }}>排行榜与术语</h4>
+          <table className="doc-table">
+            <thead><tr><th>端点</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td><code>GET /api/v1/abdl/rankings</code></td><td>排行榜（type=hot/popular/absorbency）</td></tr>
+              <tr><td><code>GET /api/v1/abdl/terms</code></td><td>术语百科（search/category）</td></tr>
+              <tr><td><code>GET /api/v1/abdl/terms/categories</code></td><td>术语分类列表</td></tr>
+            </tbody>
+          </table>
+
+          <h4 style={{ fontSize: '0.9rem', fontWeight: 600, marginTop: '0.75rem', marginBottom: '0.25rem' }}>用户档案</h4>
+          <table className="doc-table">
+            <thead><tr><th>端点</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td><code>GET /api/v1/abdl/me</code></td><td>当前用户 ABDL 档案（经验、积分、徽章）</td></tr>
+              <tr><td><code>GET /api/v1/abdl/users/:id</code></td><td>用户公开 ABDL 档案</td></tr>
+              <tr><td><code>GET /api/v1/abdl/users/:id/worn</code></td><td>穿过的纸尿裤</td></tr>
+            </tbody>
+          </table>
         </section>
 
         <section style={{ marginBottom: '2rem' }}>
@@ -159,11 +211,10 @@ export default function DocsMastodon() {
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <ul style={{ paddingLeft: '1.5rem', lineHeight: 2 }}>
               <li><strong>无 Streaming API</strong> — Moshidon 自动回退轮询，不影响使用</li>
-              <li><strong>无 Push 通知</strong> — 无系统推送，需手动刷新查看新通知</li>
               <li><strong>无联邦化</strong> — 纯本地实例，不支持跨站通信</li>
               <li><strong>转发为 no-op</strong> — 可点击但无实际效果</li>
               <li><strong>私信</strong> — Moshidon 私信功能不可用（ABDL 私信 ≠ Mastodon conversations）</li>
-              <li><strong>ABDL 专属功能</strong> — 评分、感受、纸尿裤详情、排行榜等需在网页端操作</li>
+              <li><strong>WebPush</strong> — 订阅可创建，实际推送需配置 VAPID 密钥</li>
             </ul>
           </div>
         </section>
@@ -173,11 +224,13 @@ export default function DocsMastodon() {
           <div className="card" style={{ fontSize: '0.85rem' }}>
             <p>Mastodon 兼容层源码位于后端仓库的 <code>src/mastodon/</code> 目录：</p>
             <pre style={{ marginTop: '0.5rem' }}>{`src/mastodon/
-├── shared.ts      # 共享逻辑（auth、instance、resolveStatus）
+├── shared.ts      # 共享逻辑（auth、instance、resolveStatus、toMastoId）
 ├── types.ts       # Mastodon 实体类型定义
 ├── converter.ts   # ABDL → Mastodon 数据模型转换
-├── routes.ts      # /api/v1/* 端点
-└── v2.ts          # /api/v2/* 端点`}</pre>
+├── routes.ts      # /api/v1/* 标准 Mastodon 端点
+├── v2.ts          # /api/v2/* 端点（instance、search）
+├── push.ts        # /api/v1/push/* WebPush 订阅
+└── abdl.ts        # /api/v1/abdl/* ABDL 自定义端点`}</pre>
           </div>
         </section>
       </div>
